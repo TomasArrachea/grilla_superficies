@@ -70,7 +70,7 @@ function Esfera(radio){
     this.getPosicion=function(u,v){
         // Pasaje coordenadas esfericas a cartesianas. u y v son los angulos.
         // u y v son numeros de 0 a 1 -> los paso a radianes
-        u = u * 2*Math.PI
+        u = u * Math.PI
         v = v * 2*Math.PI
         var x = radio * Math.sin(u) * Math.cos(v);
         var y = radio * Math.sin(u) * Math.sin(v);
@@ -126,8 +126,8 @@ function generarSuperficie(superficie,filas,columnas){
     normalBuffer = [];
     uvBuffer = [];
 
-    for (var i=0; i < filas; i++) {
-        for (var j=0; j < columnas; j++) {
+    for (var i=0; i <= filas; i++) {
+        for (var j=0; j <= columnas; j++) {
 
             var u=j/columnas;
             var v=i/filas;
@@ -148,13 +148,13 @@ function generarSuperficie(superficie,filas,columnas){
 
             uvBuffer.push(uvs[0]);
             uvBuffer.push(uvs[1]);
-
         }
     }
 
     // Buffer de indices de los triángulos
     indexBuffer=[];  
-
+    columnas += 1
+    filas += 1
     for (i=0; i < filas - 1; i++) {
         for (j=0; j < columnas; j++) {
             indexBuffer.push(j + columnas*i);
